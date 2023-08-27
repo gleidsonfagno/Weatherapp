@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Previsão do Tempo</title>
+</head>
+<body>
+  <h1>Previsão do Tempo</h1>
+  <input type="text" id="cityInput" placeholder="Digite o nome da cidade">
+  <button onclick="getWeather()">Pesquisar</button>
+  <div id="forecast"></div>
+
+  <script>
+    // Substitua 'YOUR_API_KEY' pela sua chave da API OpenWeather
+    const apiKey = 'add92f5fe6da5ae6a4e38ce37b72590f';
+    const cityInput = document.getElementById('cityInput');
+    const forecastContainer = document.getElementById('forecast'); 
+
+    function getWeather() {
+      const city = cityInput.value;
+
+      // Obtendo a previsão do tempo
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+          const forecastList = data.list;
+
+          let forecastHTML = '<ul>';
+
+          for (let i = 0; i < forecastList.length; i += 8) { // A cada 24 horas
+            const forecastDate = new Date(forecastList[i].dt * 1000);
+            const day = forecastDate.toLocaleDateString('en-US', { weekday: 'long' });
+            const temperature = forecastList[i].main.temp;
+            const description = forecastList[i].weather[0].description;
+
+            forecastHTML += `<li>${day}: ${temperature}°C - ${description} <i class="fas fa-${weatherIcon}"></i></li>`;
+          }
+
+          forecastHTML += '</ul>';
+          forecastContainer.innerHTML = forecastHTML;
+        })
+        .catch(error => {
+          console.error('Erro ao obter a previsão do tempo:', error);
+        });
+    }
+  </script>
+</body>
+</html>

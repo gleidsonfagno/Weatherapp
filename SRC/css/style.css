@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Montserrat:wght@600&family=Raleway:wght@500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box !important;
+    font-family: 'Raleway', sans-serif;
+}
+
+main {
+    color: #E7E7EB;
+    background: #100E1D;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.app_left {
+    width: 459px;
+    /* background-image: url(../img/Cloud-background.png); */
+    background-color: #1E213A;
+    /* background-position: center;
+    background-repeat: no-repeat; */
+    padding: 2% 46px;
+    text-align: center;
+    height: 100vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+    color: #E7E7EB;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 66px;
+}
+
+.header input {
+    text-align: center;
+    max-width: 161px;
+    color: #E7E7EB !important;
+}
+
+#cityInput {
+    background: #6E707A;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    outline: none;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.25);
+    fill: rgba(255, 255, 255, 0.20);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 50%;
+}
+
+.app_data {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+}
+
+.app_data img {
+    width: 100%;
+    max-width: 202px;
+    margin: auto;
+}
+
+.temperatura {
+    color: #E7E7EB;
+    font-family: 'Raleway', sans-serif;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.modelo_temperatura {
+    color: #A09FB1;
+    font-family: 'Raleway', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.foorter {
+    color: #88869D;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* descricao do app os proximos 5 dias  */
+
+.app_right {
+    max-width: 704px;
+    padding-bottom: 30px;
+    margin: auto;
+    width: 100%;
+    color: #E7E7EB;
+    height: 100vh;
+    /* overflow: auto; */
+    overflow-y: auto;
+    justify-items: center;
+    align-items: center;
+}
+
+.dias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    /* margin: 54px; */
+}
+
+.carde {
+    width: 120px;
+    height: 177px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: #1E213A;
+    margin: 26px;
+    border: #1E213A;
+    padding: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carde span {
+    font-variant: clamp(8px, 6px, 1px);
+}
+
+.carde .img img {
+    max-width: 56px;
+    width: 100%;
+}
+
+/* ondde vai ficar os vento umildade etc */
+.tempo h2 {
+    color: #E7E7EB;
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 12px;
+    padding-left: 9px;
+}
+
+.tempo .status h2 {
+    color: #E7E7EB;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.decricaotempo {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
+    gap: 10px;
+}
+
+.status {
+    max-width: 328px;
+    width: 100%;
+    background: #1E213A;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 11px 0;
+}
+
+.decricaotempo .wind {
+    padding: 46px;
+}
+
+.status img {
+    width: 12.183px;
+    height: 12.183px;
+    transform: rotate(-150deg);
+    flex-shrink: 0;
+}
+
+.carde .temperatura {
+    display: flex;
+    flex-direction: row;
+}
+
+/* barra de progresso  */
+.humidity-bar {
+    margin: auto;
+    width: 90%;
+    border-radius: 80px;
+    background: #E7E7EB;
+    height: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    /* background-color: #4caf50; */
+    border-radius: 80px;
+    background: #FFEC65;
+    width: 0;
+}
+
+.porcentagem {
+    margin: auto;
+    width: 90%;
+    position: relative;
+    top: 21px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.porcentagem_float {
+    float: right;
+    right: -298px;
+    top: -20px;
+    position: relative;
+    width: max-content;
+    /* display: inline-block; */
+}
+.edit{
+    color: #E7E7EB;
+    /* font-family: Raleway; */
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+@media (max-width: 720px) {
+    main {
+        background: #100E1D;
+        color: #E7E7EB;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app_left {
+        width: 100%;
+    }
+
+    .decricao_app {
+        align-items: center;
+        margin: 20px auto;
+    }
+
+    .dias {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+    }
+
+    .decricaotempo {
+        grid-template-columns: repeat(auto-fit, minmax(328px, 100%));
+    }
+}

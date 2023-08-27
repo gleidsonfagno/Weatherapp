@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Previsão do Tempo</title>
+    <style>
+        .carde{
+            background-color: cornflowerblue;
+            max-width: 120px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #forecastData{
+            display: flex;
+            gap: 20px;
+        }
+        .humidity-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        }
+
+        .progress {
+        height: 100%;
+        background-color: #4caf50;
+        width: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Previsão do Tempo para os Próximos 7 Dias</h1>
+    <!-- <div class="humidity-bar">
+        <div class="progress">20%</div>
+    </div> -->
+    <div class="hoje">Hoje
+    </div>
+    <div id="forecastData"></div>
+      
+
+    <script>
+
+        const apiKey = '3aa2cbf6f660275526f10a86df02bc47'; // Substitua pelo seu API Key
+        const hoje1 = document.querySelector(".hoje")
+        const cityName = 'Sao Paulo'; // Nome da cidade
+        const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=metric`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const forecastList = data.list;
+                const forecastDataContainer = document.getElementById('forecastData');
+                console.log(data)
+
+
+
+                const pressure = data.list[0].main.pressure;
+                const humidity = data.list[0].main.humidity;
+                const visibility = data.list[0].visibility;
+                const temp = data.list[0].main.temp;
+                const speed = data.list[0].wind.speed;
+                const hoje = data.list[0].dt;
+                const agora = new Date(hoje * 1000);
+                const nesseMomento = agora.toLocaleDateString("pt-BR",{weekday: "long"})
+                const icon = `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`;
+
+                // Supondo que você já tenha extraído o valor da humidade da API
+                // const humidade = data.list[0].main.humidity;; // Substitua pelo valor real
+                // const progressBar = document.querySelector(".progress");
+                // progressBar.style.width = `${humidade}%`;
+
+                console.log(agora)
+                hoje1.innerHTML = `
+                    <div>
+                    <p>hoje: ${nesseMomento}</p>
+                    <img src="${icon}" alt="Previsão do Tempo">
+                    <p>temp: ${temp}°C</p>
+                    <p>Air Pressure: ${pressure}</p>
+                    <p>speed: ${speed}</p>
+                    </div>
+                    <hr>
+                `
+                
+                // let i comecar com dois pra começaor do dia de amanha em diante
+                for (let i = 2; i < forecastList.length; i+=8) {
+                    const forecastDate = new Date(forecastList[i].dt * 1000);
+                    const day = forecastDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+
+                    const temperatureMax = forecastList[i].main.temp_max;
+                    const weatherDescription = forecastList[i].weather[0].description;
+                    const weatherIcon = forecastList[i].weather[0].icon;
+                    const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
+
+                    const forecastItem = document.createElement('div');
+                    forecastItem.innerHTML = `
+                        <div class="carde">
+                            <p>Dia: ${day}</p>
+                            <div class="img"><img src="${iconUrl}" alt="Previsão do Tempo"></div>
+                            <p>Temperatura Máxima: ${temperatureMax}°C</p>
+                            <p>Descrição do Tempo: ${weatherDescription}</p>
+                        </div>
+                    `;
+                    forecastItem.classList.add("dias")
+                    forecastDataContainer.appendChild(forecastItem);
+
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter dados de previsão:', error);
+            });
+    </script>
+</body>
+</html>

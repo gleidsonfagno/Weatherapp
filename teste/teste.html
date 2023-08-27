@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="cityInput" type="text">
+    <button id="searchButton">enviar</button>
+    <div id="app_data"></div>
+    <div id="maximum_scale"></div>
+</body>
+<script>
+
+const searchButton = document.getElementById('searchButton');
+const cityInput = document.getElementById('cityInput');
+const appData = document.getElementById('app_data'); // Supondo que app_data é a div onde você exibirá os dados atuais
+const maximumScale = document.getElementById('maximum_scale'); // Supondo que maximum_scale é a div onde você exibirá as temperaturas máximas dos próximos dias
+const apiKey = 'add92f5fe6da5ae6a4e38ce37b72590f';
+
+
+searchButton.addEventListener('click', () => {
+    const cityName = cityInput.value;
+
+    if (cityName) {
+        // Obter tempo atual
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=pt_br`)
+            .then(response => response.json())
+            .then(data => {
+                const iconCode = data.weather[0].icon;
+                const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+                const temperature = data.main.temp;
+                const localCity = data.name;
+                const pais = data.sys.country;
+                const nuvemDescricao = data.weather[0].description;
+
+                const forecastDate = new Date(data.dt * 1000);
+                const day = forecastDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+                const numeroDomes = forecastDate.getDate();
+                const mes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][forecastDate.getMonth()];
+
+                // Colocar os dados atuais na tela
+                appData.innerHTML = `
+                    <div class="app_data">
+                        <img class="img_app" src=${iconUrl} alt="img">
+                        <span class="temperatura">${temperature}<span class="modelo_temperatura">℃</span></span>
+                        <h2>${nuvemDescricao}</h2>
+                        <div class="foorter">
+                            <span>Today</span>
+                            <span>${day}, ${numeroDomes} ${mes}</span>
+                            <div class="local">
+                                <p>${localCity}, ${pais}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Obter previsão para os próximos 5 dias
+                return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=metric&lang=pt_br`);
+            })
+            .then(response => response.json())
+            .then(data => {
+                const forecastList = data.list;
+
+                maximumScale.innerHTML = ''; // Limpar conteúdo anterior
+
+                for (let i = 0; i < forecastList.length; i += 8) { // A cada 24 horas
+                    const forecastDate = new Date(forecastList[i].dt * 1000);
+                    const day = forecastDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+
+                    const temperatureMax = forecastList[i].main.temp_max;
+
+                    // Colocar os dados da previsão na tela
+                    maximumScale.innerHTML += `<p>${day}: ${temperatureMax}°C</p>`;
+                }
+            })
+            .catch(error => {
+                console.log("Erro ao obter dados:", error);
+            });
+    }
+});
+
+</script>
+</html>

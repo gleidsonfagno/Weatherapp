@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  maximum-scale=5" />
+
+  <link rel="icon" href="devchallenges.png" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://devchallenges.io/" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+
+  <title>Devchallenges</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+    <div class="app">
+      <form id="inputForm">
+        <div class="seach">
+          <div class="header">
+            <input class="cityInput" type="text" placeholder="Seach for places">
+            <button class="searchButton" getWeather()></button>
+          </div>
+          <!-- <div>
+            <label for="genderSelect">London</label>
+            <select id="genderSelect">
+              <option value="male">London</option>
+              <option value="female">Paris</option>
+              <option value="other">altamira</option>
+            </select>
+          </div> -->
+        </div>
+        <div class="app_data">
+          <img src="SRC/img/Shower.png" alt="">
+          <span class="temperatura">15<span class="modelo_temperatura">℃</span></span>
+          <h2>Chuva</h2>
+          <div class="foorter">
+            <span>Hoje </span>
+            <span class="dia_mes">Fri, 5 Jun</span>
+            <div class="local">
+              <p>Helsinki</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="decricao_app">
+      <!-- os 5 dias seguintes -->
+      <div class="dias">
+        <div class="dia">
+          <span>Tomorrow</span>
+          <div class="img"><img src="SRC/img/Shower.png" alt=""></div>
+          <div class="teperatura">
+            <span id="maximum-scale">16°C</span>
+            <span id="ninmum-scale">11°C</span>
+          </div>
+        </div>
+        <div class="dia">
+          <span>Sun, 7 Jun</span>
+          <div class="img"><img src="SRC/img/Clear.png" alt=""></div>
+          <div class="teperatura">
+            <span class="maximum-scale">16°C</span>
+            <span class="minimum-scale">11°C</span>
+          </div>
+        </div>
+        <div class="dia">
+          <span>Tomorrow</span>
+          <div class="img"><img src="SRC/img/LightRain.png" alt=""></div>
+          <div class="teperatura">
+            <span class="maximum-scale">16°C</span>
+            <span class="ninmum-scale">11°C</span>
+          </div>
+        </div>
+        <div class="dia">
+          <span>Tomorrow</span>
+          <div class="img"><img src="SRC/img/LightRain.png" alt=""></div>
+          <div class="teperatura">
+            <span class="maximum-scale">16°C</span>
+            <span class="ninmum-scale">11°C</span>
+          </div>
+        </div>
+        <div class="dia">
+          <span>Tomorrow</span>
+          <div class="img"><img src="SRC/img/LightRain.png" alt=""></div>
+          <div class="teperatura">
+            <span class="maximum-scale">16°C</span>
+            <span class="maximum-scale">11°C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="temp">
+        
+        <h2>Today’s Hightlights </h2>
+        <div class="decricaotempo">
+          <div class="status">
+            <span>Wind status</span>
+            <h2>7mph</h2>
+            <div>
+              <img src="SRC/img/HeavyCloud.png" alt="">
+              <span></span>
+            </div>
+          </div>
+          <div class="status">
+            <span>Humidity</span>
+            <h2>84% </h2>
+            <div>
+              <img src="SRC/img/HeavyCloud.png" alt="">
+              <span></span>
+            </div>
+          </div>
+          <div class="status">
+            <span>Visibility</span>
+            <h2>6,4 miles</h2>
+            <div>
+              <img src="SRC/img/HeavyCloud.png" alt="">
+              <span></span>
+            </div>
+          </div>
+          <div class="status">
+            <span>Air Pressure</span>
+            <h2>998 mb </h2>
+            <div>
+              <img src="SRC/img/HeavyCloud.png" alt="">
+              <span></span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+<!--  -->
+    </div>
+  </main>
+  <script src="SRC/js/script.js"></script>
+</body>
+
+</html>

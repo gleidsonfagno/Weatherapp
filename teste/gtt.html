@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Previsão do Tempo</title>
+  <style>
+    .forecast{
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    .dia{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: cornflowerblue;
+      width: 120px;
+      border-radius: 3px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Previsão do Tempo e os 5 dis da semana</h1>
+  <input type="text" id="cityInput" placeholder="Digite o nome da cidade">
+  <button onclick="getWeather()">Pesquisar</button>
+  <div id="forecast" class="forecast">
+    <div class="card">
+      <h2 class="dia">${day}</h2>
+      <img src=${iconUrl} alt="img">
+      <p class="max">Temp Mínima: ${temperatureMin}°C</p>
+      <p class="min">Temp Máxima: ${temperatureMax}°C</p>
+    </div>
+  </div>
+
+  <script>
+    // Substitua 'YOUR_API_KEY' pela sua chave da API OpenWeather
+    const apiKey = 'add92f5fe6da5ae6a4e38ce37b72590f';
+    const cityInput = document.getElementById('cityInput');
+    const forecastContainer = document.getElementById('forecast');
+
+    const dia = document.querySelectorAl
+    function getWeather() {
+      const city = cityInput.value;
+
+      // Obtendo a previsão do tempo
+      
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=pt_br`)
+        .then(response => response.json())
+        .then(data => {
+          const forecastList = data.list;
+          console.log(forecastList)
+          console.log(data)
+
+          let forecastHTML = '<div class="forecast"></div.';
+          
+          for (let i = 0; i < forecastList.length; i += 8) { // A cada 24 horas
+            const forecastDate = new Date(forecastList[i].dt * 1000);
+            const day = forecastDate.toLocaleDateString('en-US', { weekday: 'long' });
+            const temperature = forecastList[i].main.temp;
+            const description = forecastList[i].weather[0].description;
+            const weatherIcon = forecastList[i].weather[0].icon;
+            const temperatureMin = forecastList[i].main.temp_min;
+            const temperatureMax = forecastList[i].main.temp_max;
+
+            const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
+            console.log(iconUrl)
+
+            // forecastHTML += `<li>${day}: ${temperature}°C - ${description} <i class="fas fa-${iconUrl}"></i></li>
+            // <img class="img_app" src=${iconUrl} alt="img">
+            // <p>Temp Mínima: ${temperatureMin}°C</p>
+            // <p>Temp Máxima: ${temperatureMax}°C</p>`;
+
+            forecastHTML += `
+            <div class="dia">
+              <h2>${day}</h2>
+              <img src=${iconUrl} alt="img">
+              <p>Temp Mínima: ${temperatureMin}°C</p>
+              <p>Temp Máxima: ${temperatureMax}°C</p>
+            </div>
+            `
+
+
+          }
+
+          // forecastHTML += '</ul>';
+
+          forecastContainer.innerHTML = forecastHTML;
+        })
+        .catch(error => {
+          console.error('Erro ao obter a previsão do tempo:', error);
+        });
+    }
+
+  </script>
+</body>
+</html>
